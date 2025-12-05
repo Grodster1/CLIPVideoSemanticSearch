@@ -23,7 +23,7 @@ class VideoLoader:
             self.frame_hop = 1
             
     def __len__(self):
-        return self.total_frames // self.frame_hop
+        return int(self.total_frames // self.frame_hop)
     
     def __iter__(self):
         current_frame = 0

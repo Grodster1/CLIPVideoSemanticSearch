@@ -1,5 +1,5 @@
 import torch
-from transformers import CLIPProcessor, CLIPModel, CLIPConfig
+from transformers import CLIPProcessor, CLIPModel
 
 class CLIPEngine:
     def __init__(self, model_name="openai/clip-vit-base-patch32", device = None):

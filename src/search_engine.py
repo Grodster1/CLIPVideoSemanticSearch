@@ -1,11 +1,10 @@
 import torch
-from model.clip_model import CLIPEngine
+from src.model.clip_model import CLIPEngine
 import numpy as np
 import json
 import os
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'data', 'index')
 
 
 class SearchEngine:
@@ -21,13 +20,13 @@ class SearchEngine:
     def search(self, qeuery, top_n=5):
         tex_emb=self.model.get_text_embeddings([qeuery])
         scores = (self.vectors @ tex_emb.T).squeeze()
-        best_indices = np.argsort(scores)[::-1][top_n]
+        best_indices = np.argsort(scores)[::-1][:top_n]
         
         results = []
         
         for idx in best_indices:
             results.append({
-                'metadata':self.metadata[idx],
+                'timestamp':self.metadata[idx],
                 'score':float(scores[idx])
             })
         
